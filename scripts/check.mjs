@@ -13,6 +13,8 @@ for (const [label, vp] of [['desktop', { width: 1440, height: 900 }], ['tablet',
   check(`[${label}] page loads`, r?.status() === 200)
   await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 50)) } })
   check(`[${label}] no horizontal overflow`, (await p.evaluate(() => document.documentElement.scrollWidth - innerWidth)) <= 0)
+  const nm = await p.$eval('h1', (h) => { const [a, z] = [...h.children].map((c) => c.getBoundingClientRect()); return Math.abs(a.top - z.top) < 2 ? z.left - a.right : 99 })
+  check(`[${label}] name has a word gap`, nm > 8, `${Math.round(nm)}px`)
   check(`[${label}] no JavaScript errors`, errs.length === 0, errs.slice(0, 2).join(' | '))
   await p.close()
 }

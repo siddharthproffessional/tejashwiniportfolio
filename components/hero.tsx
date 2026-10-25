@@ -27,7 +27,7 @@ export function Hero() {
           {person.name.split(' ').map((word, w, words) => {
             const offset = words.slice(0, w).join(' ').length + (w ? 1 : 0)
             return (
-              <span key={word} className="inline-block whitespace-nowrap">
+              <span key={word} className={w < words.length - 1 ? 'mr-[0.24em] inline-block whitespace-nowrap' : 'inline-block whitespace-nowrap'}>
                 {word.split('').map((ch, i) => (
                   <motion.span
                     key={i}
@@ -40,7 +40,6 @@ export function Hero() {
                     {ch}
                   </motion.span>
                 ))}
-                {w < words.length - 1 && <span aria-hidden>{' '}</span>}
               </span>
             )
           })}
