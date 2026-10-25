@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Tejaswini Verma — design tokens
+  Deep green-black foundation, ivory type, brushed-gold primary accent, emerald secondary.
+  Cormorant Garamond for display, Manrope for text, JetBrains Mono for figures.
+*/
+@layer base {
+  :root {
+    --background: 156 45% 4%;
+    --surface: 154 39% 7%;
+    --raised: 152 37% 10%;
+    --border: 151 29% 15%;
+    --foreground: 42 42% 89%;
+    --muted: 141 7% 63%;
+    --gold: 40 50% 57%;
+    --emerald: 159 53% 42%;
+    --danger: 6 65% 65%;
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Manrope Variable', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: hsl(var(--gold) / 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--gold));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[76rem] px-5 sm:px-8 lg:px-12;
+  }
+
+  .figure {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: hsl(var(--gold));
+  }
+
+  /* Brushed-gold text, used for the name and section numerals only */
+  .gold-text {
+    background: linear-gradient(100deg, #f3dfa8 0%, #c9a45c 35%, #8e6f33 55%, #e9cf8e 75%, #b48c45 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hairline {
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.7), transparent);
+    height: 1px;
+  }
+
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold tracking-wide;
+    transition:
+      transform 160ms var(--ease),
+      background-color 260ms var(--ease),
+      color 260ms var(--ease),
+      border-color 260ms var(--ease);
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-gold {
+    background: linear-gradient(180deg, #e2c27c, #b88f44);
+    color: hsl(var(--background));
+  }
+  .btn-gold:hover {
+    background: linear-gradient(180deg, #ecd08f, #c79c4e);
+  }
+  .btn-line {
+    @apply border text-foreground;
+    border-color: hsl(var(--gold) / 0.5);
+  }
+  .btn-line:hover {
+    border-color: hsl(var(--gold));
+    color: hsl(var(--gold));
+  }
+
+  .panel {
+    background: linear-gradient(180deg, hsl(var(--raised) / 0.9), hsl(var(--surface) / 0.9));
+    border: 1px solid hsl(var(--border));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+}
